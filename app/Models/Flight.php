@@ -13,55 +13,38 @@ class Flight extends Model
      * @var string
      * @var bool
      */
-    protected $table = 'my_flights';
-    
-    use \Illuminate\Database\Eloquent\Concerns\HasUuids;
-    protected $primaryKey = 'id';
-    public $incrementing = false;
-    protected $keyType = 'string';
-    public $timestamps = false;
-    protected $dateFormat = 'U';
-    const CREATED_AT = 'creation_date';
-    const UPDATED_AT = 'updated_date';
-    protected $attributes = [
-        'status' => '[]',
-        'delayed' => false,
-    ];
 
-    
-    
+    // You can define properties, methods, and other class members here
 
-	
-
-	/**
-	 * @return mixed
-	 */
-	public function getKeyType() {
-		return $this->keyType;
-	}
-	
-	/**
-	 * @param mixed $keyType 
-	 * @return self
-	 */
-	public function setKeyType($keyType): self {
-		$this->keyType = $keyType;
-		return $this;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getDateFormat() {
-		return $this->dateFormat;
-	}
-	
-	/**
-	 * @param mixed $dateFormat 
-	 * @return self
-	 */
-	public function setDateFormat($dateFormat): self {
-		$this->dateFormat = $dateFormat;
-		return $this;
-	}
+    // Example method where you can put the code
+    public function exampleMethod()
+    {
+        $user = User::create([
+            'first_name' => 'Taylor',
+            'last_name' => 'Otwell',
+            'title' => 'Developer',
+        ]);
+         
+        $user->title = 'Painter';
+         
+        $user->isDirty(); // true
+        $user->isDirty('title'); // true
+        $user->isDirty('first_name'); // false
+        $user->isDirty(['first_name', 'title']); // true
+         
+        $user->isClean(); // false
+        $user->isClean('title'); // false
+        $user->isClean('first_name'); // true
+        $user->isClean(['first_name', 'title']); // false
+         
+        $user->save();
+         
+        $user->isDirty(); // false
+        $user->isClean(); // true
+        $user->wasChanged(); // true
+$user->wasChanged('title'); // true
+$user->wasChanged(['title', 'slug']); // true
+$user->wasChanged('first_name'); // false
+$user->wasChanged(['first_name', 'title']); // true
+    }
 }
