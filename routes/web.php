@@ -19,3 +19,10 @@ Route::get('/', function () {
 Route::get('/profile', function () {
     // Your route logic here
 })->middleware('auth');
+use App\Http\Middleware\EnsureTokenIsValid;
+ 
+Route::withoutMiddleware([EnsureTokenIsValid::class])->group(function () {
+    Route::get('/profile', function () {
+        //
+    });
+});
