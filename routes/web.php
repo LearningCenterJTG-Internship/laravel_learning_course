@@ -26,3 +26,8 @@ Route::withoutMiddleware([EnsureTokenIsValid::class])->group(function () {
         //
     });
 });
+/*use App\Http\Middleware\EnsureUserHasRole;
+
+Route::middleware([EnsureUserHasRole::class:role])->group(function () {
+    // Your protected routes go here
+});*/
