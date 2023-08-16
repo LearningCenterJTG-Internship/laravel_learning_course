@@ -1,27 +1,12 @@
-<?php
-
-namespace App\Providers;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\ServiceProvider;
-
-class AppServiceProvider extends ServiceProvider
+use App\Models\User;
+use App\Observers\UserObserver;
+ 
+/**
+ * Register any events for your application.
+ *
+ * @return void
+ */
+public function boot()
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
-    }
-
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
-        //
-        Model::preventLazyLoading(! $this->app->isProduction());
-        Model::shouldBeStrict(! $this->app->isProduction());
-    }
+    User::observe(UserObserver::class);
 }
